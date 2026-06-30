@@ -1,0 +1,17 @@
+# model weights
+models/
+
+# python
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# env
+.env
+
+# openvino compiled blobs
+*.blob
+*.xml.cache
