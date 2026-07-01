@@ -16,6 +16,11 @@ class RuleBasedClassifier:
     and query complexity signals.
     """
 
+    CURRENT_KNOWLEDGE_KEYWORDS = {
+        "current", "latest", "today", "now", "recent", "this year",
+        "who is the president", "who is the ceo", "who is the prime minister",
+    }
+
     CODE_KEYWORDS = {
         "write a function", "implement", "debug", "fix this code",
         "python", "javascript", "algorithm", "class", "def ", "code for",
@@ -53,6 +58,7 @@ class RuleBasedClassifier:
         has_reasoning = any(kw in q for kw in self.REASONING_KEYWORDS)
         is_simple_pattern = any(re.match(p, q) for p in self.SIMPLE_PATTERNS)
         is_multi_part = question_marks > 1 or " and " in q
+        requires_current = any(kw in q for kw in self.CURRENT_KNOWLEDGE_KEYWORDS)
 
         # --- complexity scoring ---
         complexity_score = 0
@@ -79,7 +85,9 @@ class RuleBasedClassifier:
 
         # --- routing decision ---
         # local only for short, simple, non-code queries
-        if (
+        if requires_current:
+            route = "remote"
+        elif (
             complexity == "simple"
             and predicted_tokens <= self.short_output_threshold
             and not has_code
@@ -93,11 +101,12 @@ class RuleBasedClassifier:
             "predicted_output_tokens": predicted_tokens,
             "route_recommendation": route,
             "signals": {
-                "word_count": word_count,
-                "has_code": has_code,
-                "has_reasoning": has_reasoning,
-                "is_simple_pattern": is_simple_pattern,
-                "is_multi_part": is_multi_part,
-                "complexity_score": complexity_score,
-            },
+            "word_count": word_count,
+            "has_code": has_code,
+            "has_reasoning": has_reasoning,
+            "is_simple_pattern": is_simple_pattern,
+            "is_multi_part": is_multi_part,
+            "requires_current": requires_current,
+            "complexity_score": complexity_score,
+        },
         }
