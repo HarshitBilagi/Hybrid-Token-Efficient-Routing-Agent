@@ -266,77 +266,50 @@ Prompts the local Phi-3.5-mini model to self-assess the query before generating 
 
 ## Benchmark Results
 
-### Accuracy
-
-| Classifier | Correct | Total | Accuracy | Local route % | Token savings |
-|---|---|---|---|---|---|
-| rule_based | 9 | 9 | 100% | 33.3% | 9.4% (216 tokens) |
-| llm_judged | 9 | 9 | 100% | 22.2% | 6.6% (157 tokens) |
-
-### Key tradeoff
-
-Rule-based classifier routes more aggressively to local (33% vs 22%), saving more
-tokens at zero classifier latency cost. LLM-judged classifier is more conservative,
-adding ~10s overhead per query. On a 9-query balanced dataset both achieve 100%
-accuracy — differentiation appears on adversarial queries (subtle current-events,
-ambiguous complexity) where keyword matching fails.
-
-### Token Economics (vs always-remote baseline)
-
-| Classifier | Baseline tokens | Actual tokens | Saved | Saving % |
-|---|---|---|---|---|
-| rule_based | 2,295 | 2,079 | 216 | 9.4% |
-| llm_judged | 2,376 | 2,219 | 157 | 6.6% |
-
-### Route Performance
-
-| Route | Accuracy | Avg latency | Completion tokens |
-|---|---|---|---|
-| local (NPU) | 100% | 8,756ms | 216 |
-| remote (Groq) | 100% | 1,321ms | 1,810 |
-
 ### Dataset
 
-9 hand-curated queries across 4 categories:
+19 hand-curated queries across 4 categories (9 original + 10 adversarial):
 
 | Category | Count | Routing expectation |
 |---|---|---|
-| simple_factual | 3 | Local preferred |
-| current_events | 2 | Remote required |
-| code | 2 | Remote required |
-| reasoning | 2 | Remote required |
+| simple_factual | 9 | Local preferred, failure-prone for INT4 |
+| current_events | 4 | Remote required |
+| code | 3 | Remote required |
+| reasoning | 3 | Remote required |
 
 ### Accuracy
 
 | Classifier | Correct | Total | Accuracy |
 |---|---|---|---|
-| rule_based | 8 | 9 | 88.9% |
-| llm_judged | 9 | 9 | 100% |
+| rule_based | 17 | 19 | 89.5% |
+| llm_judged | 19 | 19 | 100.0% |
 
-The single rule_based failure: `simple_02` (How many continents) — the local Phi-3.5-mini INT4 model produced a malformed numbered list with formatting corruption. The LLM-judged classifier avoided this by routing the query to remote, where the response was clean and complete.
+### Token Economics (vs always-remote baseline)
 
-### Token Savings vs Always-Remote Baseline
+| Classifier | Baseline tokens | Actual tokens | Saved | Saving % |
+|---|---|---|---|---|
+| rule_based | 3,572 | 2,888 | 684 | 19.1% |
+| llm_judged | 3,823 | 3,277 | 546 | 14.3% |
 
-Queries routed local consume 0 remote tokens (local inference is free).
+### Route Performance
 
-| Classifier | Queries routed local | Remote tokens saved | Saving vs always-remote |
-|---|---|---|---|
-| rule_based | 3/9 (33%) | ~234 completion tokens | ~33% |
-| llm_judged | 2/9 (22%) | ~156 completion tokens | ~22% |
+| Classifier | Route | Queries | Accuracy | Avg latency | Completion tokens |
+|---|---|---|---|---|---|
+| rule_based | local | 9 (47.4%) | 77.8% | 8,929ms | 684 |
+| rule_based | remote | 10 (52.6%) | 100.0% | 1,077ms | 2,445 |
+| llm_judged | local | 7 (36.8%) | 100.0% | 8,782ms | 546 |
+| llm_judged | remote | 12 (63.2%) | 100.0% | 963ms | 2,747 |
 
-The rule-based classifier is more aggressive about routing local (higher token savings, lower accuracy). The LLM-judged classifier is more conservative (lower token savings, higher accuracy). This is the core tradeoff the system is designed to expose.
+### Core Tradeoff
 
-### NPU Latency Baseline
+The LLM-judged classifier trades 4.8% token savings for a 10.5 percentage
+point accuracy gain over rule-based. The entire accuracy gap is in the
+`simple_factual` category (77.8% vs 100%) — the LLM judge correctly identifies
+which simple queries the INT4 local model will handle unreliably, and routes
+them remote instead. All other categories score 100% with both classifiers.
 
-| Metric | Value |
-|---|---|
-| Pipeline load (cached blob) | ~6–8s |
-| Throughput | ~10–12 tok/s |
-| Typical simple query latency | ~9s (80 tokens) |
-| Typical complex query latency | ~18s (200 tokens) |
-
-At 10–12 tok/s, local inference is slower than remote (Groq returns 70B model responses in under 2s). The token savings benefit is economic (cost), not latency. For latency-sensitive applications, the `max_latency_ms` constraint can force-route to remote.
-
+This confirms the central thesis: smarter routing (at some cost) produces
+better accuracy/efficiency tradeoffs than heuristic routing.
 ---
 
 ## Known Limitations and Documented Failure Modes
