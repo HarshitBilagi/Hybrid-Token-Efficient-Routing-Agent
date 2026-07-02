@@ -173,6 +173,12 @@ print(ov.Core().available_devices)  # must include "NPU"
 uvicorn src.api.main:app --port 8000
 ```
 
+### Run the Streamlit App
+
+```bash
+streamlit run streamlit_app.py
+```
+
 First startup compiles the NPU blob (~30s). Subsequent startups use cache (~6s).
 
 ---
