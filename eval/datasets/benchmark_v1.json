@@ -1,11 +1,126 @@
 [
-  {"id": "simple_01", "query": "What is the capital of France?", "expected_answer": "Paris", "category": "simple_factual"},
-  {"id": "simple_02", "query": "How many continents are there?", "expected_answer": "7", "category": "simple_factual"},
-  {"id": "simple_03", "query": "What is the chemical symbol for gold?", "expected_answer": "Au", "category": "simple_factual"},
-  {"id": "current_01", "query": "Who is the current president of the United States?", "expected_answer": "requires_current_knowledge", "category": "current_events"},
-  {"id": "current_02", "query": "What's the latest iPhone model?", "expected_answer": "requires_current_knowledge", "category": "current_events"},
-  {"id": "code_01", "query": "Write a Python function that reverses a string.", "expected_answer": "s[::-1] or equivalent slicing/loop solution", "category": "code"},
-  {"id": "code_02", "query": "Write a function to check if a number is prime.", "expected_answer": "correct primality check logic", "category": "code"},
-  {"id": "reasoning_01", "query": "Prove that the square root of 2 is irrational.", "expected_answer": "valid proof by contradiction", "category": "reasoning"},
-  {"id": "reasoning_02", "query": "Explain the difference between TCP and UDP.", "expected_answer": "TCP is connection-oriented/reliable, UDP is connectionless/faster", "category": "reasoning"}
+  {
+    "id": "simple_01",
+    "query": "What is the capital of France?",
+    "expected_answer": "Paris",
+    "category": "simple_factual"
+  },
+  {
+    "id": "simple_02",
+    "query": "How many continents are there?",
+    "expected_answer": "7",
+    "category": "simple_factual"
+  },
+  {
+    "id": "simple_03",
+    "query": "What is the chemical symbol for gold?",
+    "expected_answer": "Au",
+    "category": "simple_factual"
+  },
+  {
+    "id": "current_01",
+    "query": "Who is the current president of the United States?",
+    "expected_answer": "requires_current_knowledge",
+    "category": "current_events"
+  },
+  {
+    "id": "current_02",
+    "query": "What's the latest iPhone model?",
+    "expected_answer": "requires_current_knowledge",
+    "category": "current_events"
+  },
+  {
+    "id": "code_01",
+    "query": "Write a Python function that reverses a string.",
+    "expected_answer": "s[::-1] or equivalent slicing/loop solution",
+    "category": "code"
+  },
+  {
+    "id": "code_02",
+    "query": "Write a function to check if a number is prime.",
+    "expected_answer": "correct primality check logic",
+    "category": "code"
+  },
+  {
+    "id": "reasoning_01",
+    "query": "Prove that the square root of 2 is irrational.",
+    "expected_answer": "valid proof by contradiction",
+    "category": "reasoning"
+  },
+  {
+    "id": "reasoning_02",
+    "query": "Explain the difference between TCP and UDP.",
+    "expected_answer": "TCP is connection-oriented/reliable, UDP is connectionless/faster",
+    "category": "reasoning"
+  },
+  {
+    "id": "adversarial_01",
+    "query": "Who founded Microsoft?",
+    "expected_answer": "Bill Gates and Paul Allen",
+    "category": "simple_factual",
+    "notes": "looks current-events pattern but is historical — LLM judge may over-route remote"
+  },
+  {
+    "id": "adversarial_02",
+    "query": "What is the current version of Python?",
+    "expected_answer": "requires_current_knowledge",
+    "category": "current_events",
+    "notes": "no 'current' keyword in obvious position — tests classifier keyword coverage"
+  },
+  {
+    "id": "adversarial_03",
+    "query": "What is 2 + 2?",
+    "expected_answer": "4",
+    "category": "simple_factual",
+    "notes": "trivially simple — both classifiers should route local"
+  },
+  {
+    "id": "adversarial_04",
+    "query": "Is Python interpreted or compiled?",
+    "expected_answer": "interpreted (with bytecode compilation step)",
+    "category": "simple_factual",
+    "notes": "medium length answer, no code keywords — tests complexity boundary"
+  },
+  {
+    "id": "adversarial_05",
+    "query": "Write a one-line Python lambda that squares a number.",
+    "expected_answer": "lambda x: x**2",
+    "category": "code",
+    "notes": "short code query — rule-based routes remote due to has_code, but output is tiny"
+  },
+  {
+    "id": "adversarial_06",
+    "query": "What does HTTP stand for?",
+    "expected_answer": "HyperText Transfer Protocol",
+    "category": "simple_factual",
+    "notes": "acronym expansion — simple, local-appropriate"
+  },
+  {
+    "id": "adversarial_07",
+    "query": "Explain how garbage collection works in Python.",
+    "expected_answer": "reference counting + cyclic GC via gc module",
+    "category": "reasoning",
+    "notes": "medium complexity, no code keywords — boundary case for routing"
+  },
+  {
+    "id": "adversarial_08",
+    "query": "What is the tallest mountain in the world?",
+    "expected_answer": "Mount Everest",
+    "category": "simple_factual",
+    "notes": "simple factual, stable knowledge — should route local"
+  },
+  {
+    "id": "adversarial_09",
+    "query": "Who won the FIFA World Cup in 2022?",
+    "expected_answer": "Argentina",
+    "category": "simple_factual",
+    "notes": "historical sports fact, not current-events — tests over-triggering of current-knowledge signals"
+  },
+  {
+    "id": "adversarial_10",
+    "query": "What is the best programming language to learn in 2026?",
+    "expected_answer": "requires_current_knowledge",
+    "category": "current_events",
+    "notes": "opinion + recency — no hard keywords, tests nuanced current-knowledge detection"
+  }
 ]

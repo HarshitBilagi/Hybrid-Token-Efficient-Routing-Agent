@@ -1,114 +1,114 @@
 {
   "rule_based": {
     "summary": {
-      "total_queries": 9,
-      "total_correct": 9,
-      "accuracy": 100.0,
-      "queries_routed_local": 3,
-      "queries_routed_remote": 6,
-      "local_pct": 33.3,
+      "total_queries": 19,
+      "total_correct": 17,
+      "accuracy": 89.5,
+      "queries_routed_local": 9,
+      "queries_routed_remote": 10,
+      "local_pct": 47.4,
       "fallback_triggered": 0,
       "judge_parse_failures": 0,
       "errors": 0
     },
     "token_economics": {
-      "always_remote_baseline_tokens": 2295,
-      "actual_tokens_used": 2079,
-      "tokens_saved": 216,
-      "saving_pct": 9.4
+      "always_remote_baseline_tokens": 3572,
+      "actual_tokens_used": 2888,
+      "tokens_saved": 684,
+      "saving_pct": 19.1
     },
     "accuracy_by_route": {
       "local": {
-        "queries": 3,
-        "correct": 3,
-        "accuracy": 100.0,
-        "avg_latency_ms": 8756,
-        "total_completion_tokens": 216
+        "queries": 9,
+        "correct": 7,
+        "accuracy": 77.8,
+        "avg_latency_ms": 8929,
+        "total_completion_tokens": 684
       },
       "remote": {
-        "queries": 6,
-        "correct": 6,
+        "queries": 10,
+        "correct": 10,
         "accuracy": 100.0,
-        "avg_latency_ms": 1321,
-        "total_completion_tokens": 1810
+        "avg_latency_ms": 1077,
+        "total_completion_tokens": 2445
       }
     },
     "accuracy_by_category": {
       "simple_factual": {
+        "total": 9,
+        "correct": 7,
+        "accuracy": 77.8
+      },
+      "current_events": {
+        "total": 4,
+        "correct": 4,
+        "accuracy": 100.0
+      },
+      "code": {
         "total": 3,
         "correct": 3,
         "accuracy": 100.0
       },
-      "current_events": {
-        "total": 2,
-        "correct": 2,
-        "accuracy": 100.0
-      },
-      "code": {
-        "total": 2,
-        "correct": 2,
-        "accuracy": 100.0
-      },
       "reasoning": {
-        "total": 2,
-        "correct": 2,
+        "total": 3,
+        "correct": 3,
         "accuracy": 100.0
       }
     }
   },
   "llm_judged": {
     "summary": {
-      "total_queries": 9,
-      "total_correct": 9,
+      "total_queries": 19,
+      "total_correct": 19,
       "accuracy": 100.0,
-      "queries_routed_local": 2,
-      "queries_routed_remote": 7,
-      "local_pct": 22.2,
+      "queries_routed_local": 7,
+      "queries_routed_remote": 12,
+      "local_pct": 36.8,
       "fallback_triggered": 0,
       "judge_parse_failures": 0,
       "errors": 0
     },
     "token_economics": {
-      "always_remote_baseline_tokens": 2376,
-      "actual_tokens_used": 2219,
-      "tokens_saved": 157,
-      "saving_pct": 6.6
+      "always_remote_baseline_tokens": 3823,
+      "actual_tokens_used": 3277,
+      "tokens_saved": 546,
+      "saving_pct": 14.3
     },
     "accuracy_by_route": {
       "local": {
-        "queries": 2,
-        "correct": 2,
-        "accuracy": 100.0,
-        "avg_latency_ms": 8720,
-        "total_completion_tokens": 157
-      },
-      "remote": {
         "queries": 7,
         "correct": 7,
         "accuracy": 100.0,
-        "avg_latency_ms": 1082,
-        "total_completion_tokens": 1909
+        "avg_latency_ms": 8782,
+        "total_completion_tokens": 546
+      },
+      "remote": {
+        "queries": 12,
+        "correct": 12,
+        "accuracy": 100.0,
+        "avg_latency_ms": 963,
+        "total_completion_tokens": 2747
       }
     },
     "accuracy_by_category": {
       "simple_factual": {
+        "total": 9,
+        "correct": 9,
+        "accuracy": 100.0
+      },
+      "current_events": {
+        "total": 4,
+        "correct": 4,
+        "accuracy": 100.0
+      },
+      "code": {
         "total": 3,
         "correct": 3,
         "accuracy": 100.0
       },
-      "current_events": {
-        "total": 2,
-        "correct": 2,
-        "accuracy": 100.0
-      },
-      "code": {
-        "total": 2,
-        "correct": 2,
-        "accuracy": 100.0
-      },
       "reasoning": {
-        "total": 2,
-        "correct": 2,
+        "total": 3,
+        "correct": 3,
         "accuracy": 100.0
       }
     }

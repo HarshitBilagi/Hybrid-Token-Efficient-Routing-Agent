@@ -1,0 +1,289 @@
+id,category,query,expected_answer,response,route_taken,classifier_used,fallback_triggered,fallback_reason,completion_tokens,prompt_tokens,latency_ms,total_wall_ms,model_used,error,correct
+simple_01,simple_factual,What is the capital of France?,Paris,"The capital of France is Paris. It is the center of both the French government and culture. Known for its iconic landmarks such as the Eiffel Tower, Notre-Dame Cathedral, and the Louvre Museum, which is the world' tubes to see. The city also has a significant role in the world of fashion, gastronomy, and the arts.",local,llm_judged,FALSE,,78,,8770,19944,Phi-3.5-mini-instruct-int4-gq,,TRUE
+simple_02,simple_factual,How many continents are there?,7,"There are 7 continents:
+
+1. Africa
+2. Antarctica
+3. Asia
+4. Australia
+5. Europe
+6. North America
+7. South America
+
+Note: Some sources may group Europe and Asia together as a single continent, Eurasia, or combine North and South America as the Americas. However, the 7-continent model is the most widely accepted classification.",remote,llm_judged,FALSE,,80,41,1792,9134,llama-3.3-70b-versatile,,TRUE
+simple_03,simple_factual,What is the chemical symbol for gold?,Au,"The chemical symbol for gold is ""Au."" This symbol is derived from the Latin name for gold, ""aurum,"" which is where we get the symbol ""Au"" from. Gold is a transition metal and is categorized under the elemental group in the periodic table. It has the atomic number 79 and is known for its bright, slightly blue, and slightly green luster",local,llm_judged,FALSE,,79,,8920,19198,Phi-3.5-mini-instruct-int4-gq,,TRUE
+current_01,current_events,Who is the current president of the United States?,requires_current_knowledge,"I do not have access to real-time information. However, I can tell you that as of my cut-off knowledge date of December 2023, the President of the United States is Joe Biden. Please note that my information may not be up to date, and I recommend verifying with a more recent source for the most current information.",remote,llm_judged,FALSE,,68,45,524,10817,llama-3.3-70b-versatile,,TRUE
+current_02,current_events,What's the latest iPhone model?,requires_current_knowledge,"As of my cut-off knowledge date (01 March 2023), the latest iPhone models are:
+
+1. iPhone 14
+2. iPhone 14 Plus
+3. iPhone 14 Pro
+4. iPhone 14 Pro Max
+
+Please note that newer models may have been released since my knowledge cut-off date. For the most up-to-date information, I recommend checking Apple's official website or other reliable sources.",remote,llm_judged,FALSE,,85,42,394,10590,llama-3.3-70b-versatile,,TRUE
+code_01,code,Write a Python function that reverses a string.,s[::-1] or equivalent slicing/loop solution,"**String Reversal Function in Python**
+=====================================
+
+### Overview
+
+This function takes an input string and returns the reversed string.
+
+### Code
+
+```python
+def reverse_string(input_str: str) -> str:
+    """"""
+    Reverses the input string.
+
+    Args:
+        input_str (str): The string to be reversed.
+
+    Returns:
+        str: The reversed string.
+    """"""
+    return input_str[::-1]
+
+# Example usage
+if __name__ == ""__main__"":
+    input_str = ""Hello, World!""
+    reversed_str = reverse_string(input_str)
+    print(f""Reversed string: {reversed_str}"")
+```
+
+### Explanation
+
+* The function uses Python's slice notation `[::-1]` to create a reversed copy of the input string.
+* The `[::-1]` slice means ""start at the end of the string and end at position 0, move with the step -1"" which effectively reverses the string.
+* The function is concise, readable, and well-documented with a clear description, arguments, and return value.",remote,llm_judged,FALSE,,221,45,843,11022,llama-3.3-70b-versatile,,TRUE
+code_02,code,Write a function to check if a number is prime.,correct primality check logic,"**Prime Number Check Function**
+================================
+
+### Description
+
+This function checks if a given number is prime. A prime number is a natural number greater than 1 that has no positive divisors other than 1 and itself.
+
+### Code
+
+```python
+def is_prime(n: int) -> bool:
+    """"""
+    Checks if a number is prime.
+
+    Args:
+    n (int): The number to check.
+
+    Returns:
+    bool: True if the number is prime, False otherwise.
+    """"""
+    if n <= 1:
+        return False
+    for i in range(2, int(n ** 0.5) + 1):
+        if n % i == 0:
+            return False
+    return True
+
+# Example usage
+def main():
+    numbers = [2, 3, 4, 5, 6, 7, 8, 9, 10]
+    for num in numbers:
+        print(f""{num} is prime: {is_prime(num)}"")
+
+if __name__ == ""__main__"":
+    main()
+```
+
+### Explanation
+
+1.  The `is_prime` function takes an integer `n` as input and returns a boolean indicating whether it's prime.
+2.  If `n` is less than or equal to 1, it's not prime, so we return False.
+3.  We only need to check divisors up to the square root of `n`, as any factor larger than that would have a corresponding factor smaller than the square root.
+4.  If `n` is divisible by any number in the checked range, it's not prime, so we return False.
+5.  If `n` passes all checks, it's prime, so we return True.
+
+### Example Output
+
+```
+2 is prime: True
+3 is prime: True
+4 is prime: False
+5 is prime: True
+6 is prime: False
+7 is prime: True
+8 is prime: False
+9 is prime: False
+10 is prime: False
+```",remote,llm_judged,FALSE,,422,46,974,11160,llama-3.3-70b-versatile,,TRUE
+reasoning_01,reasoning,Prove that the square root of 2 is irrational.,valid proof by contradiction,"A classic proof in mathematics.
+
+**Theorem:** The square root of 2 is irrational.
+
+**Proof:**
+
+We will prove this theorem by contradiction, which means that we will assume the opposite of what we want to prove and then show that this assumption leads to a logical contradiction.
+
+**Assumption:** The square root of 2 is rational.
+
+If the square root of 2 is rational, then it can be expressed as a fraction of two integers, a and b, where b is non-zero and a and b have no common factors (i.e., their greatest common divisor is 1). In other words, we can write:
+
+√2 = a/b
+
+Squaring both sides of this equation, we get:
+
+2 = a²/b²
+
+Multiplying both sides by b², we get:
+
+2b² = a²
+
+Now, since 2b² is an even number (it's 2 times an integer), a² must also be an even number. This means that a must be an even number, because the square of an odd number is always odd.
+
+So, we can write a = 2k, where k is an integer. Substituting this into the previous equation, we get:
+
+2b² = (2k)²
+2b² = 4k²
+b² = 2k²
+
+This means that b² is also an even number, which implies that b is also an even number.
+
+But wait, we assumed that a and b have no common factors, and now we've shown that both a and b are even numbers. This means that they have a common factor of 2, which contradicts our assumption.
+
+**Conclusion:** Our assumption that the square root of 2 is rational leads to a logical contradiction. Therefore, we conclude that the square root of 2 is irrational.
+
+This proof shows that there is no integer a and b (with b non-zero) such that a² = 2b², which means that √2 cannot be expressed as a finite decimal or fraction. It's a fundamental result in mathematics, and it has far-reaching implications in many areas of mathematics and science.",remote,llm_judged,FALSE,,444,47,1680,11820,llama-3.3-70b-versatile,,TRUE
+reasoning_02,reasoning,Explain the difference between TCP and UDP.,"TCP is connection-oriented/reliable, UDP is connectionless/faster","**Introduction to TCP and UDP**
+================================
+
+TCP (Transmission Control Protocol) and UDP (User Datagram Protocol) are two fundamental protocols used for data transmission over the internet. While both protocols enable data exchange between devices, they differ significantly in their approach, functionality, and use cases.
+
+**TCP (Transmission Control Protocol)**
+------------------------------------
+
+### Key Characteristics:
+
+1. **Connection-oriented**: Establishes a connection between the sender and receiver before data transmission.
+2. **Reliable**: Ensures that data is delivered in the correct order, without duplication or loss.
+3. **Error-checked**: Verifies the integrity of data packets and retransmits corrupted or lost packets.
+4. **Ordered**: Guarantees that data packets are delivered in the sequence they were sent.
+
+### Use Cases:
+
+* File transfers (e.g., FTP, SFTP)
+* Email
+* Web browsing (e.g., HTTP, HTTPS)
+* Remote access (e.g., SSH, Telnet)
+
+**UDP (User Datagram Protocol)**
+-------------------------------
+
+### Key Characteristics:
+
+1. **Connectionless**: Does not establish a connection before data transmission.
+2. **Best-effort**: Does not guarantee delivery, order, or integrity of data packets.
+3. **Error-tolerant**: Does not retransmit corrupted or lost packets.
+4. **Unordered**: Does not guarantee the sequence of data packet delivery.
+
+### Use Cases:
+
+* Online gaming
+* Video streaming (e.g., YouTube, Netflix)
+* Voice over IP (VoIP)
+* DNS lookups
+
+**Comparison Summary**
+--------------------
+
+|  | TCP | UDP |
+| --- | --- | --- |
+| **Connection** | Connection-oriented | Connectionless |
+| **Reliability** | Reliable | Best-effort |
+| **Error handling** | Error-checked | Error-tolerant |
+| **Order** | Ordered | Unordered |
+| **Use cases** | File transfers, email, web browsing | Online gaming, video streaming, VoIP, DNS lookups |
+
+In summary, TCP is a reliable, connection-oriented protocol suitable for applications requiring guaranteed data delivery, while UDP is a best-effort, connectionless protocol ideal for applications that prioritize speed and can tolerate some data loss.",remote,llm_judged,FALSE,,448,44,1402,9080,llama-3.3-70b-versatile,,TRUE
+adversarial_01,simple_factual,Who founded Microsoft?,Bill Gates and Paul Allen,"Microsoft was co-founded by Bill Gates, the co-founder of the company, and Paul Allen, the company's co-founder and co-developer. They started Microsoft in April 1erne, 1975, in Allakhmetskaya, which is now Kaluga, Russia. Bill Gates initially had a vision for a computer that could",local,llm_judged,FALSE,,79,,8722,18981,Phi-3.5-mini-instruct-int4-gq,,TRUE
+adversarial_02,current_events,What is the current version of Python?,requires_current_knowledge,"The current version of Python is Python 3.11, which was released on October 24, 2022. However, please note that new versions are released periodically, so it's always a good idea to check the official Python website for the most up-to-date information. Additionally, Python 3.12 is currently in development and is expected to be released soon.",remote,llm_judged,FALSE,,76,43,372,10577,llama-3.3-70b-versatile,,TRUE
+adversarial_03,simple_factual,What is 2 + 2?,4,"The answer to the mathematical operation 2 +  tubes and wires, and the intricate dance of electrons within them. The sum of 2 + 2 is a simple arithmetic calculation, which is universally and universally accepted:
+
+
+2 + 2 = 4
+
+
+This truth is not subject to interpretation, debate, or the complexities of electronics.",local,llm_judged,FALSE,,75,,8693,18864,Phi-3.5-mini-instruct-int4-gq,,TRUE
+adversarial_04,simple_factual,Is Python interpreted or compiled?,interpreted (with bytecode compilation step),"Python is often considered an interpreted language, but the reality is a bit more complex. Python code is compiled into an intermediate form called bytecode, which is then executed by the Python interpreter.
+
+Here's how it works:
+
+1. **Compilation**: When you write Python code, it's first compiled into bytecode by the Python compiler. This compilation step happens internally, and you don't need to explicitly compile your code.
+2. **Bytecode generation**: The compiler generates bytecode, which is platform-independent, intermediate code that can be executed by the Python interpreter.
+3. **Interpretation**: The bytecode is then executed by the Python interpreter, which reads the bytecode and performs the corresponding actions.
+
+So, while Python code isn't compiled into machine code like languages like C or C++, it's still compiled into an intermediate form (bytecode) that's then executed by the interpreter.
+
+This hybrid approach provides several benefits, including:
+
+* **Platform independence**: Python code can run on multiple platforms without needing to be recompiled.
+* **Dynamic typing**: Python's dynamic typing system allows for flexibility and ease of use.
+* **Rapid development**: The interpreted nature of Python enables rapid prototyping and development.
+
+In summary, Python is both compiled (into bytecode) and interpreted (by the Python interpreter). This unique approach makes Python a popular and versatile language for a wide range of applications.",remote,llm_judged,FALSE,,276,41,1052,11213,llama-3.3-70b-versatile,,TRUE
+adversarial_05,code,Write a one-line Python lambda that squares a number.,lambda x: x**2,"```python
+square = lambda x: x ** 2```",remote,llm_judged,FALSE,,14,46,381,10555,llama-3.3-70b-versatile,,TRUE
+adversarial_06,simple_factual,What does HTTP stand for?,HyperText Transfer Protocol,"HTTP stands for HyperText Transfer Protocol. It is the foundational protocol used to transfer and receive textual and non-text elements (like images, scripts, forms) on the World Wide Web. Developed by Tim Berners-Lee and others, HTTP is a request-response protocol that facilitates communication between a client (a web browser or app) and a server hosting",local,llm_judged,FALSE,,79,,8886,16265,Phi-3.5-mini-instruct-int4-gq,,TRUE
+adversarial_07,reasoning,Explain how garbage collection works in Python.,reference counting + cyclic GC via gc module,"Garbage Collection in Python
+==========================
+
+Python's garbage collection is a memory management mechanism that automatically frees up memory occupied by objects that are no longer in use. This process helps prevent memory leaks and ensures efficient use of system resources.
+
+### How Garbage Collection Works
+
+1. **Object Creation**: When you create an object in Python, it is stored in memory. Python keeps track of the number of references to each object.
+2. **Reference Counting**: Python uses a reference counting algorithm to manage memory. When you create a new reference to an object (e.g., assign it to a new variable), the reference count for that object is incremented. When you delete a reference to an object (e.g., delete a variable or reassign it to a new object), the reference count is decremented.
+3. **Garbage Collection**: When the reference count for an object reaches zero, it becomes eligible for garbage collection. Python's garbage collector periodically runs in the background to free up memory occupied by these objects.
+
+### Generational Garbage Collection
+
+Python's garbage collector uses a generational approach, where objects are divided into three generations based on their lifespan:
+
+* **Generation 0**: Newly created objects (short-lived)
+* **Generation 1**: Objects that have survived one garbage collection cycle (medium-lived)
+* **Generation 2**: Long-lived objects that have survived multiple garbage collection cycles
+
+The garbage collector focuses on the youngest generation first, as it is more likely to have objects that are eligible for garbage collection.
+
+### Example
+
+```python
+import gc
+
+# Create an object
+obj = object()
+
+# Create a new reference to the object
+obj_ref = obj
+
+# Delete one of the references
+del obj
+
+# The object is still alive because of the other reference
+print(obj_ref is not None)  # Output: True
+
+# Delete the other reference
+del obj_ref
+
+# The object is now eligible for garbage collection
+gc.collect()  # Force garbage collection
+```
+
+In this example, the object is created and referenced by two variables. When one of the references is deleted, the object's reference count is decremented, but it is still alive because of the other reference. Only when the second reference is deleted is the object eligible for garbage collection.
+
+### Best Practices
+
+* Use the `weakref` module to create weak references to objects, which do not prevent garbage collection.
+* Avoid using circular references, as they can prevent garbage collection.
+* Use the `gc` module to manually control garbage",remote,llm_judged,FALSE,,512,44,1750,9627,llama-3.3-70b-versatile,,TRUE
+adversarial_08,simple_factual,What is the tallest mountain in the world?,Mount Everest,"The tallest mountain in the world is the Mount Everest, which reaches an elevation of 8,855.560 meters above sea level (29,035.79 feet) above sea level, according to the revised 2021 survey. It is located in the extreme southern part of the Nepal-Tibet border near the",local,llm_judged,FALSE,,79,,8767,19060,Phi-3.5-mini-instruct-int4-gq,,TRUE
+adversarial_09,simple_factual,Who won the FIFA World Cup in 2022?,Argentina,"The winner of the 2022 FIFA World Cup was Argentina. They defeated France 4-2 in a penalty shootout, after the match had ended 3-3 after extra time, in the final on December 18, 2022, at the Lusail Iconic Stadium in Qatar. This was Argentina's third World Cup title, with their previous wins coming in 1978 and 1986. Lionel Messi was named the tournament's best player, winning the Golden Ball award.",remote,llm_judged,FALSE,,101,46,396,10710,llama-3.3-70b-versatile,,TRUE
+adversarial_10,current_events,What is the best programming language to learn in 2026?,requires_current_knowledge,"Predicting the ""best"" programming language to learn for any given year, including 2026, is challenging and somewhat subjective, as it can depend on various factors such as industry demand, personal interest, and the evolving nature of technology. However, I can provide you with some insights and considerations that might help you make an informed decision.
+
+1.",local,llm_judged,FALSE,,77,,8713,18972,Phi-3.5-mini-instruct-int4-gq,,TRUE
