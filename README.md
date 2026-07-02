@@ -266,6 +266,35 @@ Prompts the local Phi-3.5-mini model to self-assess the query before generating 
 
 ## Benchmark Results
 
+### Accuracy
+
+| Classifier | Correct | Total | Accuracy | Local route % | Token savings |
+|---|---|---|---|---|---|
+| rule_based | 9 | 9 | 100% | 33.3% | 9.4% (216 tokens) |
+| llm_judged | 9 | 9 | 100% | 22.2% | 6.6% (157 tokens) |
+
+### Key tradeoff
+
+Rule-based classifier routes more aggressively to local (33% vs 22%), saving more
+tokens at zero classifier latency cost. LLM-judged classifier is more conservative,
+adding ~10s overhead per query. On a 9-query balanced dataset both achieve 100%
+accuracy — differentiation appears on adversarial queries (subtle current-events,
+ambiguous complexity) where keyword matching fails.
+
+### Token Economics (vs always-remote baseline)
+
+| Classifier | Baseline tokens | Actual tokens | Saved | Saving % |
+|---|---|---|---|---|
+| rule_based | 2,295 | 2,079 | 216 | 9.4% |
+| llm_judged | 2,376 | 2,219 | 157 | 6.6% |
+
+### Route Performance
+
+| Route | Accuracy | Avg latency | Completion tokens |
+|---|---|---|---|
+| local (NPU) | 100% | 8,756ms | 216 |
+| remote (Groq) | 100% | 1,321ms | 1,810 |
+
 ### Dataset
 
 9 hand-curated queries across 4 categories:

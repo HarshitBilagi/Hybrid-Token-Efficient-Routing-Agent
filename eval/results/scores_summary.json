@@ -1,0 +1,116 @@
+{
+  "rule_based": {
+    "summary": {
+      "total_queries": 9,
+      "total_correct": 9,
+      "accuracy": 100.0,
+      "queries_routed_local": 3,
+      "queries_routed_remote": 6,
+      "local_pct": 33.3,
+      "fallback_triggered": 0,
+      "judge_parse_failures": 0,
+      "errors": 0
+    },
+    "token_economics": {
+      "always_remote_baseline_tokens": 2295,
+      "actual_tokens_used": 2079,
+      "tokens_saved": 216,
+      "saving_pct": 9.4
+    },
+    "accuracy_by_route": {
+      "local": {
+        "queries": 3,
+        "correct": 3,
+        "accuracy": 100.0,
+        "avg_latency_ms": 8756,
+        "total_completion_tokens": 216
+      },
+      "remote": {
+        "queries": 6,
+        "correct": 6,
+        "accuracy": 100.0,
+        "avg_latency_ms": 1321,
+        "total_completion_tokens": 1810
+      }
+    },
+    "accuracy_by_category": {
+      "simple_factual": {
+        "total": 3,
+        "correct": 3,
+        "accuracy": 100.0
+      },
+      "current_events": {
+        "total": 2,
+        "correct": 2,
+        "accuracy": 100.0
+      },
+      "code": {
+        "total": 2,
+        "correct": 2,
+        "accuracy": 100.0
+      },
+      "reasoning": {
+        "total": 2,
+        "correct": 2,
+        "accuracy": 100.0
+      }
+    }
+  },
+  "llm_judged": {
+    "summary": {
+      "total_queries": 9,
+      "total_correct": 9,
+      "accuracy": 100.0,
+      "queries_routed_local": 2,
+      "queries_routed_remote": 7,
+      "local_pct": 22.2,
+      "fallback_triggered": 0,
+      "judge_parse_failures": 0,
+      "errors": 0
+    },
+    "token_economics": {
+      "always_remote_baseline_tokens": 2376,
+      "actual_tokens_used": 2219,
+      "tokens_saved": 157,
+      "saving_pct": 6.6
+    },
+    "accuracy_by_route": {
+      "local": {
+        "queries": 2,
+        "correct": 2,
+        "accuracy": 100.0,
+        "avg_latency_ms": 8720,
+        "total_completion_tokens": 157
+      },
+      "remote": {
+        "queries": 7,
+        "correct": 7,
+        "accuracy": 100.0,
+        "avg_latency_ms": 1082,
+        "total_completion_tokens": 1909
+      }
+    },
+    "accuracy_by_category": {
+      "simple_factual": {
+        "total": 3,
+        "correct": 3,
+        "accuracy": 100.0
+      },
+      "current_events": {
+        "total": 2,
+        "correct": 2,
+        "accuracy": 100.0
+      },
+      "code": {
+        "total": 2,
+        "correct": 2,
+        "accuracy": 100.0
+      },
+      "reasoning": {
+        "total": 2,
+        "correct": 2,
+        "accuracy": 100.0
+      }
+    }
+  }
+}
