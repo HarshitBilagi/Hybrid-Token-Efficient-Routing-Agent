@@ -71,10 +71,12 @@ class RoutingAgent:
             try:
                 result = self._generate_local(query, context, classification)
             except Exception as e:
-                # runtime fallback: local failed, retry on remote
                 fallback_triggered = True
+                fallback_reason = f"{type(e).__name__}: {e}"
+                print(f"[Router] Local inference failed, falling back to remote: {fallback_reason}")
                 result = self._generate_remote(query, context)
         else:
+            fallback_reason = None
             result = self._generate_remote(query, context)
 
         return {
@@ -84,6 +86,7 @@ class RoutingAgent:
             "classifier_signals": classification.get("signals", {}),
             "classifier_latency_ms": classify_latency_ms,
             "fallback_triggered": fallback_triggered,
+            "fallback_reason": fallback_reason if fallback_triggered else None,
             "tokens": {
                 "completion": result.get("tokens_generated", 0),
                 "prompt": result.get("prompt_tokens"),

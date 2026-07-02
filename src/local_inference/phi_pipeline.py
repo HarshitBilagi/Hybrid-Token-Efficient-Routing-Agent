@@ -1,19 +1,22 @@
 import time
-import openvino_genai as ov_genai
 from pathlib import Path
+
+import openvino_genai as ov_genai
 
 
 class PhiNPUPipeline:
     """
-    Wraps OpenVINO GenAI LLMPipeline for Phi-3.5-mini on the Intel AI Boost NPU.
-    Exposes a simple generate() interface consumed by the router.
+    Generic OpenVINO GenAI wrapper for local NPU inference.
+    Model-agnostic: swap models by changing model_path and chat_template.
     """
 
     DEFAULT_MODEL_PATH = "./models/phi35-mini-int4-cw-ov"
+    DEFAULT_CHAT_TEMPLATE = "<|user|>\n{content}<|end|>\n<|assistant|>"  # Phi-3.5 format
 
-    def __init__(self, model_path: str = None, device: str = "NPU"):
+    def __init__(self, model_path: str = None, device: str = "NPU", chat_template: str = None):
         self.model_path = model_path or self.DEFAULT_MODEL_PATH
         self.device = device
+        self.chat_template = chat_template or self.DEFAULT_CHAT_TEMPLATE
         self._pipe = None
 
     def load(self):
@@ -38,14 +41,6 @@ class PhiNPUPipeline:
     ) -> dict:
         """
         Run inference. Returns a result dict matching the response envelope.
-
-        Args:
-            query: raw user query string
-            max_new_tokens: cap on generated tokens (keep low for latency)
-            context: optional list of {role, content} prior turns
-
-        Returns:
-            {response, tokens_generated, latency_ms, model_used}
         """
         if self._pipe is None:
             raise RuntimeError("Pipeline not loaded. Call load() first.")
@@ -77,18 +72,16 @@ class PhiNPUPipeline:
 
     def _build_prompt(self, query: str, context: list[dict]) -> str:
         """
-        Formats query + context into Phi-3.5 chat template.
+        Formats query + context using the configured chat template.
+        Model-agnostic: change chat_template to support other model families.
         """
         parts = []
         for turn in context:
             role = turn.get("role", "user")
             content = turn.get("content", "")
-            parts.append(f"<|{role}|>\n{content}<|end|>")
-        parts.append(f"<|user|>\n{query}<|end|>")
-        parts.append("<|assistant|>")
+            parts.append(self.chat_template.format(content=f"({role}) {content}"))
+        parts.append(self.chat_template.format(content=query))
         return "\n".join(parts)
 
     def is_loaded(self) -> bool:
         return self._pipe is not None
-
-        
