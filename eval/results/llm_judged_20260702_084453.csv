@@ -1,0 +1,198 @@
+id,category,query,expected_answer,response,route_taken,classifier_used,fallback_triggered,fallback_reason,completion_tokens,prompt_tokens,latency_ms,total_wall_ms,model_used,error,correct
+simple_01,simple_factual,What is the capital of France?,Paris,"The capital of France is Paris. It is the center of both the French government and culture. Known for its iconic landmarks such as the Eiffel Tower, Notre-Dame Cathedral, and the Louvre Museum, which is the world' tubes to see. The city also has a significant role in the world of fashion, gastronomy, and the arts.",local,llm_judged,FALSE,,78,,8542,19316,Phi-3.5-mini-instruct-int4-gq,,TRUE
+simple_02,simple_factual,How many continents are there?,7,"There are 7 continents:
+
+1. Africa
+2. Antarctica
+3. Asia
+4. Australia
+5. Europe
+6. North America
+7. South America
+
+Note that some sources may group Europe and Asia together as a single continent, Eurasia, or combine North and South America as the Americas. However, the 7-continent model is the most widely accepted classification.",remote,llm_judged,FALSE,,80,41,1597,8811,llama-3.3-70b-versatile,,TRUE
+simple_03,simple_factual,What is the chemical symbol for gold?,Au,"The chemical symbol for gold is ""Au."" This symbol is derived from the Latin name for gold, ""aurum,"" which is where we get the symbol ""Au"" from. Gold is a transition metal and is categorized under the elemental group in the periodic table. It has the atomic number 79 and is known for its bright, slightly blue, and slightly green luster",local,llm_judged,FALSE,,79,,8897,18903,Phi-3.5-mini-instruct-int4-gq,,TRUE
+current_01,current_events,Who is the current president of the United States?,requires_current_knowledge,"As of my cut-off date (01 March 2023), the President of the United States is Joe Biden. However, please note that my information may not be up-to-date, and I recommend checking the latest news or official sources for the most current information.",remote,llm_judged,FALSE,,54,45,360,10539,llama-3.3-70b-versatile,,TRUE
+current_02,current_events,What's the latest iPhone model?,requires_current_knowledge,"As of my knowledge cutoff in March 2023, the latest iPhone models are the iPhone 14 series, which includes:
+
+1. iPhone 14
+2. iPhone 14 Plus
+3. iPhone 14 Pro
+4. iPhone 14 Pro Max
+
+Please note that newer models may have been released since my knowledge cutoff. For the most up-to-date information, I recommend checking Apple's official website or other reliable sources.",remote,llm_judged,FALSE,,88,42,532,10636,llama-3.3-70b-versatile,,TRUE
+code_01,code,Write a Python function that reverses a string.,s[::-1] or equivalent slicing/loop solution,"**String Reversal Function in Python**
+```python
+def reverse_string(input_string: str) -> str:
+    """"""
+    Reverses the input string.
+
+    Args:
+    input_string (str): The string to be reversed.
+
+    Returns:
+    str: The reversed string.
+    """"""
+    return input_string[::-1]
+
+# Example usage:
+if __name__ == ""__main__"":
+    example_string = ""Hello, World!""
+    reversed_string = reverse_string(example_string)
+    print(f""Original string: {example_string}"")
+    print(f""Reversed string: {reversed_string}"")
+```
+This function uses Python's slice notation to extract the characters of the string in reverse order. The `[::-1]` slice means ""start at the end of the string and end at position 0, move with the step -1"" which effectively reverses the string.",remote,llm_judged,FALSE,,179,45,537,10865,llama-3.3-70b-versatile,,TRUE
+code_02,code,Write a function to check if a number is prime.,correct primality check logic,"**Prime Number Check Function**
+================================
+
+The following function checks whether a given number is prime or not. A prime number is a natural number greater than 1 that has no positive divisors other than 1 and itself.
+
+```python
+def is_prime(n: int) -> bool:
+    """"""
+    Checks if a number is prime.
+
+    Args:
+    n (int): The number to check.
+
+    Returns:
+    bool: True if the number is prime, False otherwise.
+    """"""
+    if n <= 1:
+        # Numbers less than or equal to 1 are not prime
+        return False
+    for i in range(2, int(n ** 0.5) + 1):
+        # Check divisibility up to the square root of the number
+        if n % i == 0:
+            # If the number is divisible by any number, it's not prime
+            return False
+    # If the number is not divisible by any number, it's prime
+    return True
+
+# Example usage:
+if __name__ == ""__main__"":
+    numbers_to_check = [2, 3, 4, 5, 6, 7, 8, 9, 10]
+    for num in numbers_to_check:
+        print(f""Is {num} prime? {is_prime(num)}"")
+```
+
+**How the Function Works:**
+
+1. It first checks if the number is less than or equal to 1, in which case it returns `False` as these numbers are not prime.
+2. It then iterates over the numbers from 2 to the square root of the given number (inclusive).
+3. Inside the loop, it checks if the given number `n` is divisible by the current number `i` by using the modulus operator (`n % i == 0`).
+4. If `n` is divisible by any `i`, the function immediately returns `False`, indicating that the number is not prime.
+5. If the loop completes without finding any divisors, the function returns `True`, indicating that the number is prime.
+
+**Efficiency Note:**
+
+This function checks divisibility up to the square root of the number because a larger factor of the number would be a multiple of a smaller factor that has already been checked. This optimization significantly reduces the number of iterations required for larger numbers.",remote,llm_judged,FALSE,,484,46,1362,11508,llama-3.3-70b-versatile,,TRUE
+reasoning_01,reasoning,Prove that the square root of 2 is irrational.,valid proof by contradiction,"A classic proof in mathematics. Here's the step-by-step proof that the square root of 2 is irrational:
+
+**Theorem:** √2 is irrational.
+
+**Proof by contradiction:**
+
+Assume, if possible, that √2 is rational. This means that there exist integers a and b, with b ≠ 0, such that:
+
+√2 = a/b
+
+where a and b have no common factors (i.e., they are coprime).
+
+**Step 1: Square both sides**
+
+Squaring both sides of the equation, we get:
+
+2 = (a/b)²
+2 = a²/b²
+
+**Step 2: Multiply both sides by b²**
+
+Multiplying both sides by b², we get:
+
+2b² = a²
+
+**Step 3: Analyze the equation**
+
+Since a² is an even number (2b²), we can conclude that a must also be even. (Why? Because the square of an odd number is always odd, and the square of an even number is always even.)
+
+**Step 4: Express a as 2k**
+
+Since a is even, we can write a = 2k, where k is an integer.
+
+**Step 5: Substitute a = 2k into the equation**
+
+Substituting a = 2k into the equation 2b² = a², we get:
+
+2b² = (2k)²
+2b² = 4k²
+
+**Step 6: Divide both sides by 2**
+
+Dividing both sides by 2, we get:
+
+b² = 2k²
+
+**Step 7: Analyze the equation**
+
+Since b² is an even number (2k²), we can conclude that b must also be even. (Same reasoning as in Step 3.)
+
+**Step 8: Reach a contradiction**
+
+But wait! We started with the assumption that a and b are coprime, meaning they have no common factors. However, we've now shown that both a and b are even, which means they both have 2 as a common factor. This is a contradiction!
+
+**Conclusion:**
+
+Since our assumption that √2 is rational led to a contradiction, we can conclude that √2 is, in fact, irrational. In other words, there do not exist integers a and b such that √2 = a/b.
+
+This proof by contradiction is a classic example of how to show that a statement is false by assuming its opposite and",remote,llm_judged,FALSE,,512,47,1415,11595,llama-3.3-70b-versatile,,TRUE
+reasoning_02,reasoning,Explain the difference between TCP and UDP.,"TCP is connection-oriented/reliable, UDP is connectionless/faster","**Introduction to TCP and UDP**
+================================
+
+TCP (Transmission Control Protocol) and UDP (User Datagram Protocol) are two fundamental protocols used for data communication over the internet. While both protocols are used for data transfer, they have distinct differences in their approach, advantages, and use cases.
+
+**TCP (Transmission Control Protocol)**
+--------------------------------------
+
+### Key Characteristics:
+
+* **Connection-oriented**: Establishes a connection between the sender and receiver before data transfer.
+* **Reliable**: Ensures that data is delivered in the correct order, without duplication or loss.
+* **Error-checked**: Detects and corrects errors during data transfer.
+* **Ordered**: Guarantees that data packets are delivered in the order they were sent.
+
+### How TCP Works:
+
+1. **Three-way handshake**: The sender and receiver establish a connection using a three-way handshake (SYN, SYN-ACK, ACK).
+2. **Data transfer**: Data is sent in packets, and the receiver acknowledges each packet.
+3. **Error detection**: TCP detects errors and requests retransmission of corrupted packets.
+4. **Connection closure**: The connection is closed using a four-way handshake (FIN, ACK, FIN, ACK).
+
+### Use Cases:
+
+* **File transfers**: TCP is commonly used for file transfers, such as FTP, SFTP, and HTTP.
+* **Email**: TCP is used for email communication, ensuring reliable delivery of messages.
+* **Remote desktop**: TCP is used for remote desktop connections, requiring a stable and reliable connection.
+
+**UDP (User Datagram Protocol)**
+------------------------------
+
+### Key Characteristics:
+
+* **Connectionless**: Does not establish a connection before data transfer.
+* **Best-effort**: Does not guarantee delivery or order of data packets.
+* **Error-tolerant**: Does not detect or correct errors during data transfer.
+* **Unordered**: Does not guarantee that data packets are delivered in the order they were sent.
+
+### How UDP Works:
+
+1. **Data transfer**: Data is sent in packets, without establishing a connection.
+2. **No error detection**: UDP does not detect or correct errors during data transfer.
+3. **No guarantees**: UDP does not guarantee delivery or order of data packets.
+
+### Use Cases:
+
+* **Real-time applications**: UDP is commonly used for real-time applications, such as online gaming, video streaming, and VoIP.
+* **DNS**: UDP is used for DNS (Domain Name System) queries, requiring fast and efficient lookup.
+* **Streaming media**: UDP is used for streaming media, such as online video and audio",remote,llm_judged,FALSE,,512,44,1774,9225,llama-3.3-70b-versatile,,TRUE

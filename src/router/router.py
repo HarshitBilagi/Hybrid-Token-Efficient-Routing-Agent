@@ -110,8 +110,9 @@ class RoutingAgent:
 
     def _generate_local(self, query: str, context: list[dict], classification: dict) -> dict:
         predicted_tokens = classification.get("predicted_output_tokens", 80)
-        # cap generation slightly above prediction, never runaway
-        max_tokens = min(predicted_tokens + 40, 256)
+        # floor at 80 to prevent LLM judge's low token estimates from starving generation
+        # cap at 200 to avoid runaway local inference
+        max_tokens = min(max(predicted_tokens * 2, 80), 200)
         return self.local_pipeline.generate(query, max_new_tokens=max_tokens, context=context)
 
     def _generate_remote(self, query: str, context: list[dict]) -> dict:

@@ -1,0 +1,11 @@
+[
+  {"id": "simple_01", "query": "What is the capital of France?", "expected_answer": "Paris", "category": "simple_factual"},
+  {"id": "simple_02", "query": "How many continents are there?", "expected_answer": "7", "category": "simple_factual"},
+  {"id": "simple_03", "query": "What is the chemical symbol for gold?", "expected_answer": "Au", "category": "simple_factual"},
+  {"id": "current_01", "query": "Who is the current president of the United States?", "expected_answer": "requires_current_knowledge", "category": "current_events"},
+  {"id": "current_02", "query": "What's the latest iPhone model?", "expected_answer": "requires_current_knowledge", "category": "current_events"},
+  {"id": "code_01", "query": "Write a Python function that reverses a string.", "expected_answer": "s[::-1] or equivalent slicing/loop solution", "category": "code"},
+  {"id": "code_02", "query": "Write a function to check if a number is prime.", "expected_answer": "correct primality check logic", "category": "code"},
+  {"id": "reasoning_01", "query": "Prove that the square root of 2 is irrational.", "expected_answer": "valid proof by contradiction", "category": "reasoning"},
+  {"id": "reasoning_02", "query": "Explain the difference between TCP and UDP.", "expected_answer": "TCP is connection-oriented/reliable, UDP is connectionless/faster", "category": "reasoning"}
+]
